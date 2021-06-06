@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			div#div1{
+				width: 220px;
+				height: 140px;
+				padding: 10px;
+				border: 1px solid #aaaaaa;
+			}
+			img{
+				width: 10%;
+			}
+		</style>
+		<script type="text/javascript">
+			function allowDrop(ev){
+				ev.preventDefault();
+			}
+			function drag(ev){
+				ev.dataTransfer.setData("text/plain",ev.target.id);
+			}
+			function drop(ev){
+				ev.preventDefault();
+				var data = ev.dataTransfer.getData("text/plain");
+				ev.target.appendChild(document.getElementById(data));
+			}
+		</script>
+	</head>
+	<body>
+		<p>请把图片拖放到矩形中</p>
+		<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+		<br  />
+		<img id="drag1" src="img/01.jpeg" draggable="true" ondragstart="drag(event)" />
+	</body>
+</html>
