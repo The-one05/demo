@@ -1,0 +1,22 @@
+drop table if exists student;
+create table student(
+	id int(11) not null auto_increment,
+	sname char(20) not null,
+  hobby varchar(20) not null,
+	sex enum('男', '女') not null default '男',
+	birthady date not null,
+	primary key(id)
+);
+# 插入（增）
+insert into student values(1, 'tom', '打篮球', '男', '2000-06-25');
+insert into student values(null, 'tom', '打篮球', '男', '2000-06-25');
+# insert into student set sname = 'join', hobby = '踢足球';
+# 删除（删）
+delete from student where id = 1;
+delete from student where sname = 'tom';
+# 修改（改）
+update student set hobby = '踢足球' where id = 1;
+# 查询（查）
+select * from student;
+select sname from student;
+select id, sname, hobby from student where id = 1;

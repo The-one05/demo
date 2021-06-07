@@ -1,0 +1,57 @@
+{% for stu in students %}
+     <tr>
+	<td>
+ 	      {{  forloop.counter  }}   #可以输出1,2,3...         forloop.counter0 重0开始      forloop.revcounter   倒叙输出
+	</td>
+     </tr>
+{% endfor %}
+
+
+
+{% if file.type == "文件夹" %}    ==与“文件夹”之间必须有空格
+              <button type="button" class="layui-btn layui-btn-sm">打开</button>
+          {% endif %}
+
+
+获取路径下所有文件和文件夹
+def index(requset):
+	path = r"C:\Users\张东哲\Desktop\demo\my_computer"
+	filesList = [];
+	with os.scandir(path) as files:
+		for file in files:
+			if file.is_file():
+				filesList.append({'name':file.name,'type':"文件"})
+			else :
+				filesList.insert(0,{'name':file.name,'type':"文件夹"})
+	return render(requset,'my_computer.html',{"filesList":filesList})
+
+
+
+
+
+
+字符串前加 f
+import time
+t0 = time.time()
+time.sleep(1)
+name = 'processing'
+# 以 f开头表示在字符串内支持大括号内的python 表达式
+print(f'{name} done in {time.time() - t0:.2f} s') 
+输出：
+processing done in 1.00 s
+
+
+
+
+
+# 如何向数据库一次性插入多条数据
+# 方法一：效率极低，不推荐使用
+for i in range(1000):
+    models.Book.objects.create(title=f'第{i}本书')
+
+# 方法二
+# bulk_create
+book_list = []
+for i in range(100000):
+    book_list.append(models.Book(title=f'第{i}本书'))
+models.Book.objects.bulk_create(book_list)
